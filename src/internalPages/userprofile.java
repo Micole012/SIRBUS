@@ -7,6 +7,7 @@ package internalPages;
 
 import java.awt.Color;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import myapp.loginForm;
 /**
  *
  * @author LOG IN
@@ -46,20 +47,24 @@ public class userprofile extends javax.swing.JInternalFrame {
         jPanel6 = new javax.swing.JPanel();
         mygrades = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         SEMREP = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         majorsubrep = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(51, 153, 255));
         jPanel1.setLayout(null);
 
-        jPanel3.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel3.setBackground(new java.awt.Color(153, 153, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(jPanel3);
-        jPanel3.setBounds(450, 10, 190, 170);
+        jPanel3.setBounds(480, 10, 170, 120);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("EMAIL:");
@@ -70,17 +75,22 @@ public class userprofile extends javax.swing.JInternalFrame {
         jLabel2.setText("FULL NAME:");
         jPanel1.add(jLabel2);
         jLabel2.setBounds(20, 10, 150, 50);
+
+        p_name.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(p_name);
         p_name.setBounds(110, 20, 190, 30);
+
+        p_email.setBackground(new java.awt.Color(51, 153, 255));
+        p_email.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(p_email);
         p_email.setBounds(70, 80, 180, 30);
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 180));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 700, 150));
 
-        jPanel6.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel6.setBackground(new java.awt.Color(153, 153, 255));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        mygrades.setBackground(new java.awt.Color(153, 153, 153));
+        mygrades.setBackground(new java.awt.Color(102, 153, 255));
         mygrades.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 mygradesMouseEntered(evt);
@@ -91,14 +101,18 @@ public class userprofile extends javax.swing.JInternalFrame {
         });
         mygrades.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Appointment");
-        mygrades.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 140, 30));
+        mygrades.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 140, 30));
 
-        jPanel6.add(mygrades, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 10, 150, 150));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconsfolder/appointment.png"))); // NOI18N
+        mygrades.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 10, 110, 110));
 
-        SEMREP.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel6.add(mygrades, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 10, 140, 150));
+
+        SEMREP.setBackground(new java.awt.Color(102, 153, 255));
         SEMREP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 SEMREPMouseEntered(evt);
@@ -109,14 +123,18 @@ public class userprofile extends javax.swing.JInternalFrame {
         });
         SEMREP.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 21)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Reports");
-        SEMREP.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 140, 20));
+        SEMREP.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 140, 30));
 
-        jPanel6.add(SEMREP, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 140, 150));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconsfolder/reports.png"))); // NOI18N
+        SEMREP.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 120, 120));
 
-        majorsubrep.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel6.add(SEMREP, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 150, 150));
+
+        majorsubrep.setBackground(new java.awt.Color(102, 153, 255));
         majorsubrep.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 majorsubrepMouseEntered(evt);
@@ -130,11 +148,24 @@ public class userprofile extends javax.swing.JInternalFrame {
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Schedule");
-        majorsubrep.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 150, 30));
+        majorsubrep.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 140, 30));
 
-        jPanel6.add(majorsubrep, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, -1, 150));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconsfolder/schedule.png"))); // NOI18N
+        majorsubrep.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 110));
+
+        jPanel6.add(majorsubrep, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 140, 150));
 
         getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 700, 180));
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton1.setText("LOGOUT");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 0, 90, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -163,12 +194,23 @@ public class userprofile extends javax.swing.JInternalFrame {
         majorsubrep.setBackground(navcolor);
     }//GEN-LAST:event_majorsubrepMouseExited
 
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        loginForm lf = new loginForm ();
+        lf.setVisible(true);
+        this.dispose(
+        );
+    }//GEN-LAST:event_jButton1MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel SEMREP;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;

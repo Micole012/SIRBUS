@@ -148,27 +148,27 @@ public class dashboardPage extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void manageuserMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageuserMouseEntered
-        manageuser.setBackground(navcolor);
+        manageuser.setBackground(bodycolor);
     }//GEN-LAST:event_manageuserMouseEntered
 
     private void manageuserMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageuserMouseExited
-         manageuser.setBackground(bodycolor);
+         manageuser.setBackground(navcolor);
     }//GEN-LAST:event_manageuserMouseExited
 
     private void reportsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportsMouseEntered
-        reports.setBackground(navcolor);
+        reports.setBackground(bodycolor);
     }//GEN-LAST:event_reportsMouseEntered
 
     private void reportsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportsMouseExited
-        reports.setBackground(bodycolor);
+        reports.setBackground(navcolor);
     }//GEN-LAST:event_reportsMouseExited
 
     private void settingsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_settingsMouseEntered
-        settings.setBackground(navcolor);
+        settings.setBackground(bodycolor);
     }//GEN-LAST:event_settingsMouseEntered
 
     private void settingsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_settingsMouseExited
-         settings.setBackground(bodycolor);
+         settings.setBackground(navcolor);
     }//GEN-LAST:event_settingsMouseExited
 
 

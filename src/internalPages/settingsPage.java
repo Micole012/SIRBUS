@@ -204,27 +204,27 @@ public class settingsPage extends javax.swing.JInternalFrame {
     }
 
     private void editprofileMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editprofileMouseEntered
-        editprofile.setBackground(navcolor);
+        editprofile.setBackground(bodycolor);
     }//GEN-LAST:event_editprofileMouseEntered
 
     private void editprofileMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editprofileMouseExited
-         editprofile.setBackground(bodycolor);
+         editprofile.setBackground(navcolor);
     }//GEN-LAST:event_editprofileMouseExited
 
     private void reportsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportsMouseEntered
-       reports.setBackground(navcolor);
+       reports.setBackground(bodycolor);
     }//GEN-LAST:event_reportsMouseEntered
 
     private void reportsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportsMouseExited
-       reports.setBackground(bodycolor);
+       reports.setBackground(navcolor);
     }//GEN-LAST:event_reportsMouseExited
 
     private void logoutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseEntered
-        logout.setBackground(navcolor);
+        logout.setBackground(bodycolor);
     }//GEN-LAST:event_logoutMouseEntered
 
     private void logoutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseExited
-         logout.setBackground(bodycolor);
+         logout.setBackground(navcolor);
     }//GEN-LAST:event_logoutMouseExited
 
     private void logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseClicked

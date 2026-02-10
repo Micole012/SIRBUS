@@ -6,6 +6,7 @@ import java.awt.Color;
 import internalPages.*;
 import internalPages.dashboardPage;
 import internalPages.userprofile;
+import internalPages.settingsPage;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -94,7 +95,7 @@ public class dashboard extends javax.swing.JFrame {
                 jLabel1MouseEntered(evt);
             }
         });
-        dashpane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 11, 190, -1));
+        dashpane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 11, 190, 20));
 
         navbar.add(dashpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 190, 40));
 
@@ -159,7 +160,7 @@ public class dashboard extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("My Profile");
+        jLabel5.setText("ACCOUNT");
         Profile.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 30));
 
         navbar.add(Profile, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 190, 30));
@@ -178,11 +179,11 @@ public class dashboard extends javax.swing.JFrame {
         );
         maindesktopLayout.setVerticalGroup(
             maindesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 360, Short.MAX_VALUE)
+            .addGap(0, 350, Short.MAX_VALUE)
         );
 
         jPanel1.add(maindesktop);
-        maindesktop.setBounds(190, 60, 680, 360);
+        maindesktop.setBounds(190, 60, 680, 350);
 
         header.setBackground(new java.awt.Color(51, 153, 255));
         header.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -222,7 +223,7 @@ public class dashboard extends javax.swing.JFrame {
         header.add(settings, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 0, 80, 60));
 
         jPanel1.add(header);
-        header.setBounds(190, 0, 670, 60);
+        header.setBounds(190, 0, 680, 60);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

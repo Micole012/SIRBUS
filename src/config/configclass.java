@@ -32,56 +32,86 @@ public class configclass {
     }
     
     public void addRecord(String sql, Object... values) {
-        try (Connection conn = this.connectDB(); // Use the connectDB method
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            // Loop through the values and set them in the prepared statement dynamically
-            for (int i = 0; i < values.length; i++) {
-                if (values[i] instanceof Integer) {
-                    pstmt.setInt(i + 1, (Integer) values[i]); // If the value is Integer
-                } else if (values[i] instanceof Double) {
-                    pstmt.setDouble(i + 1, (Double) values[i]); // If the value is Double
-                } else if (values[i] instanceof Float) {
-                    pstmt.setFloat(i + 1, (Float) values[i]); // If the value is Float
-                } else if (values[i] instanceof Long) {
-                    pstmt.setLong(i + 1, (Long) values[i]); // If the value is Long
-                } else if (values[i] instanceof Boolean) {
-                    pstmt.setBoolean(i + 1, (Boolean) values[i]); // If the value is Boolean
-                } else if (values[i] instanceof java.util.Date) {
-                    pstmt.setDate(i + 1, new java.sql.Date(((java.util.Date) values[i]).getTime())); // If the value is Date
-                } else if (values[i] instanceof java.sql.Date) {
-                    pstmt.setDate(i + 1, (java.sql.Date) values[i]); // If it's already a SQL Date
-                } else if (values[i] instanceof java.sql.Timestamp) {
-                    pstmt.setTimestamp(i + 1, (java.sql.Timestamp) values[i]); // If the value is Timestamp
-                } else {
-                    pstmt.setString(i + 1, values[i].toString()); // Default to String for other types
-                }
+        Connection conn = null;
+        try {
+            conn = this.connectDB(); // Use the connectDB method
+            if (conn == null) {
+                System.out.println("Error: Database connection failed!");
+                return;
             }
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.executeUpdate();
-            System.out.println("Record added successfully!");
+                // Loop through the values and set them in the prepared statement dynamically
+                for (int i = 0; i < values.length; i++) {
+                    if (values[i] instanceof Integer) {
+                        pstmt.setInt(i + 1, (Integer) values[i]); // If the value is Integer
+                    } else if (values[i] instanceof Double) {
+                        pstmt.setDouble(i + 1, (Double) values[i]); // If the value is Double
+                    } else if (values[i] instanceof Float) {
+                        pstmt.setFloat(i + 1, (Float) values[i]); // If the value is Float
+                    } else if (values[i] instanceof Long) {
+                        pstmt.setLong(i + 1, (Long) values[i]); // If the value is Long
+                    } else if (values[i] instanceof Boolean) {
+                        pstmt.setBoolean(i + 1, (Boolean) values[i]); // If the value is Boolean
+                    } else if (values[i] instanceof java.util.Date) {
+                        pstmt.setDate(i + 1, new java.sql.Date(((java.util.Date) values[i]).getTime())); // If the value is Date
+                    } else if (values[i] instanceof java.sql.Date) {
+                        pstmt.setDate(i + 1, (java.sql.Date) values[i]); // If it's already a SQL Date
+                    } else if (values[i] instanceof java.sql.Timestamp) {
+                        pstmt.setTimestamp(i + 1, (java.sql.Timestamp) values[i]); // If the value is Timestamp
+                    } else {
+                        pstmt.setString(i + 1, values[i].toString()); // Default to String for other types
+                    }
+                }
+
+                pstmt.executeUpdate();
+                System.out.println("Record added successfully!");
+            }
         } catch (SQLException e) {
             System.out.println("Error adding record: " + e.getMessage());
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    System.out.println("Error closing connection: " + e.getMessage());
+                }
+            }
         }
     }
     
     // Authentication method to check user credentials and return user type
     public String authenticate(String sql, Object... values) {
-        try (Connection conn = connectDB();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            // Set parameters using setObject for simplicity
-            for (int i = 0; i < values.length; i++) {
-                pstmt.setObject(i + 1, values[i]);
+        Connection conn = null;
+        try {
+            conn = connectDB();
+            if (conn == null) {
+                System.out.println("Error: Database connection failed!");
+                return null;
             }
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getString("u_type"); // Return user type (e.g., "Admin", "Teacher", "Student")
+                // Set parameters using setObject for simplicity
+                for (int i = 0; i < values.length; i++) {
+                    pstmt.setObject(i + 1, values[i]);
+                }
+
+                try (ResultSet rs = pstmt.executeQuery()) {
+                    if (rs.next()) {
+                        return rs.getString("u_type"); // Return user type (e.g., "Admin", "Teacher", "Student")
+                    }
                 }
             }
         } catch (SQLException e) {
             System.out.println("Login Error: " + e.getMessage());
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    System.out.println("Error closing connection: " + e.getMessage());
+                }
+            }
         }
         return null; // Return null if authentication fails
     }
@@ -89,80 +119,135 @@ public class configclass {
     // Method to get full user data for authentication
     public String[] authenticateUser(String email, String password) {
         String sql = "SELECT u_id, u_name, u_email, u_type FROM tbl_account WHERE u_email = ? AND u_pass = ?";
-        
-        try (Connection conn = connectDB();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            
-            pstmt.setString(1, email);
-            pstmt.setString(2, password);
-            
-            try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    String[] userData = new String[4];
-                    userData[0] = String.valueOf(rs.getInt("u_id"));
-                    userData[1] = rs.getString("u_name");
-                    userData[2] = rs.getString("u_email");
-                    userData[3] = rs.getString("u_type");
-                    return userData;
+        Connection conn = null;
+        try {
+            conn = connectDB();
+            if (conn == null) {
+                System.out.println("Error: Database connection failed!");
+                return null;
+            }
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, email);
+                pstmt.setString(2, password);
+                
+                try (ResultSet rs = pstmt.executeQuery()) {
+                    if (rs.next()) {
+                        String[] userData = new String[4];
+                        userData[0] = String.valueOf(rs.getInt("u_id"));
+                        userData[1] = rs.getString("u_name");
+                        userData[2] = rs.getString("u_email");
+                        userData[3] = rs.getString("u_type");
+                        return userData;
+                    }
                 }
             }
         } catch (SQLException e) {
             System.out.println("Login Error: " + e.getMessage());
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    System.out.println("Error closing connection: " + e.getMessage());
+                }
+            }
         }
         return null;
     }
     
     // Optional: You can also keep the simpler validateLogin method for basic authentication
     public boolean validateLogin(String email, String password) {
-        String sql = "SELECT COUNT(*) FROM tbl_account WHERE email = ? AND password = ?";
-        
-        try (Connection conn = this.connectDB();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            
-            pstmt.setString(1, email);
-            pstmt.setString(2, password);
-            
-            try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getInt(1) > 0; // Returns true if count > 0
+        String sql = "SELECT COUNT(*) FROM tbl_account WHERE u_email = ? AND u_pass = ?";
+        Connection conn = null;
+        try {
+            conn = this.connectDB();
+            if (conn == null) {
+                System.out.println("Error: Database connection failed!");
+                return false;
+            }
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, email);
+                pstmt.setString(2, password);
+                
+                try (ResultSet rs = pstmt.executeQuery()) {
+                    if (rs.next()) {
+                        return rs.getInt(1) > 0; // Returns true if count > 0
+                    }
                 }
             }
         } catch (SQLException e) {
             System.out.println("Login validation error: " + e.getMessage());
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    System.out.println("Error closing connection: " + e.getMessage());
+                }
+            }
         }
         return false;
     }
     
     // Method to display data from database in a JTable
     public void displayData(String sql, javax.swing.JTable table) {
-        try (Connection conn = connectDB();
-             PreparedStatement pstmt = conn.prepareStatement(sql);
-             ResultSet rs = pstmt.executeQuery()) {
-            
-            // This line automatically maps the ResultSet to your JTable
-            table.setModel(DbUtils.resultSetToTableModel(rs));
-            
+        Connection conn = null;
+        try {
+            conn = connectDB();
+            if (conn == null) {
+                System.out.println("Error: Database connection failed!");
+                return;
+            }
+            try (PreparedStatement pstmt = conn.prepareStatement(sql);
+                 ResultSet rs = pstmt.executeQuery()) {
+                
+                // This line automatically maps the ResultSet to your JTable
+                table.setModel(DbUtils.resultSetToTableModel(rs));
+                
+            }
         } catch (SQLException e) {
             System.out.println("Error displaying data: " + e.getMessage());
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    System.out.println("Error closing connection: " + e.getMessage());
+                }
+            }
         }
     }
     
     // Overloaded method with parameters for queries with WHERE clauses
     public void displayData(String sql, javax.swing.JTable table, Object... values) {
-        try (Connection conn = connectDB();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            
-            // Set parameters if provided
-            for (int i = 0; i < values.length; i++) {
-                pstmt.setObject(i + 1, values[i]);
+        Connection conn = null;
+        try {
+            conn = connectDB();
+            if (conn == null) {
+                System.out.println("Error: Database connection failed!");
+                return;
             }
-            
-            try (ResultSet rs = pstmt.executeQuery()) {
-                table.setModel(DbUtils.resultSetToTableModel(rs));
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                
+                // Set parameters if provided
+                for (int i = 0; i < values.length; i++) {
+                    pstmt.setObject(i + 1, values[i]);
+                }
+                
+                try (ResultSet rs = pstmt.executeQuery()) {
+                    table.setModel(DbUtils.resultSetToTableModel(rs));
+                }
             }
-            
         } catch (SQLException e) {
             System.out.println("Error displaying data: " + e.getMessage());
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    System.out.println("Error closing connection: " + e.getMessage());
+                }
+            }
         }
     }
 }
